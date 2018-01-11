@@ -27,7 +27,7 @@ end
 def addadmin
 	name = "chief"
 	password = "password"
-	email = "master@email.com"
+	email = "masteratemail.com"
 	prepass = Digest::Whirlpool.hexdigest("password")
 	saltedpass = Digest::Whirlpool.hexdigest("#{name}#{prepass}")
 	@@client.query("INSERT INTO Users VALUES(NULL, 'chief', '#{saltedpass}', '#{email}', 1, 1, 'Master' )")
