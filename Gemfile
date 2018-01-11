@@ -1,0 +1,10 @@
+source 'https://rubygems.org'
+
+gem 'sinatra'
+gem 'jwt'
+gem 'mysql2'
+gem 'digest'
+gem 'digest-whirlpool'
+gem 'openssl'
+gem 'sinatra-contrib'
+gem 'inifile'

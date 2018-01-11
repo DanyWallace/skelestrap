@@ -1,0 +1,44 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    backports (3.11.0)
+    digest (0.0.1)
+    digest-whirlpool (1.0.3)
+    inifile (3.0.0)
+    jwt (2.1.0)
+    multi_json (1.13.0)
+    mustermann (1.0.1)
+    mysql2 (0.4.10)
+    openssl (2.1.0)
+    rack (2.0.3)
+    rack-protection (2.0.0)
+      rack
+    sinatra (2.0.0)
+      mustermann (~> 1.0)
+      rack (~> 2.0)
+      rack-protection (= 2.0.0)
+      tilt (~> 2.0)
+    sinatra-contrib (2.0.0)
+      backports (>= 2.0)
+      multi_json
+      mustermann (~> 1.0)
+      rack-protection (= 2.0.0)
+      sinatra (= 2.0.0)
+      tilt (>= 1.3, < 3)
+    tilt (2.0.8)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  digest
+  digest-whirlpool
+  inifile
+  jwt
+  mysql2
+  openssl
+  sinatra
+  sinatra-contrib
+
+BUNDLED WITH
+   1.16.1

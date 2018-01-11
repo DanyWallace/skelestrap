@@ -1,0 +1,48 @@
+<html>
+	<head>
+		<title><%= @title %></title>
+
+		<link rel="stylesheet" type="text/css" href="css/eureka.css">
+		<link rel="stylesheet" type="text/css" href="css/bulma.css">
+
+	</head>
+
+	<body>
+	<nav class="navbar is-light" role="navigation" aria-label="main navigation">
+		<div class="navbar-start">
+		    <a class="navbar-item" href="/">Home</a>
+		</div>
+		<div class="navbar-end">
+			<% if @token == nil %>
+			<div class="navbar-item has-dropdown is-hoverable">
+				<a class="navbar-link">
+					Account
+				</a>
+				<div class="navbar-dropdown">
+					<a class="navbar-item" href="/login"> Login </a>
+					<a class="navbar-item" href="/register"> Register </a>
+				</div>
+			</div>
+			<% else %>
+			<div class="navbar-item has-dropdown is-hoverable">
+				<a class="navbar-link">
+					<%= @user_name %>
+				</a>
+				<div class="navbar-dropdown">
+					<a class="navbar-item" href="/logout"> Logout </a>
+				</div>
+			</div>
+			<% end %>
+		</div>
+	</div>
+	</nav>
+
+
+	<div class="contain">
+
+	<%= yield %>
+	
+	</div>
+	</body>
+
+</html>

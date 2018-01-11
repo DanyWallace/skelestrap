@@ -1,0 +1,26 @@
+<div class="columns">
+    <div class="column is-5 is-offset-3 box">
+    <form method="post" action="" class="form">
+    <label class="label">Username</label>
+    <div class="control">
+        <input class ="input" type="text" placeholder="Username" name="username">
+    <div>
+
+        <label class="label">Password</label>
+
+    <div class="control">
+        <input class ="input" type="text" placeholder="Username" name="password">
+    </div>
+    <span><h1>Hope you're correct</h1></span>
+        <center><button type="submit" class="button is-info is-outlined">Login?</button></center>
+    </form>
+    </div>
+        <% if @error %>
+        <center>
+            <span class="tag is-danger separatee"> Nope </span>
+        </center>
+        <center>
+            <span> <%= @message %> </span>
+        </center>
+        <% end %>
+</div>

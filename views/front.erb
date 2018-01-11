@@ -1,0 +1,9 @@
+	<div class="columns">
+		<div class="column is-one-quarter box">
+			hello this goes all the way to who knows what
+		</div>
+		<div class="column is-offset-1	 box">
+			<p>Welcome. <%= @user_name %>, you have a valid token.</p>
+        	<p> Your token will expire at: <%= @exp.strftime("%m/%d/%y %H:%M:%S %P") %></p>
+		</div>
+	</div>
