@@ -1,0 +1,13 @@
+---
+layout: default
+---
+
+    <h1 class="title">Meta</h1>
+    <h2 class="subtitle">News regarding this site</h2>
+    <hr>
+
+{% for post in site.categories.meta %}
+ <li><span>{{ post.date | date_to_string }}</span> &nbsp; <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></li>
+{% endfor %}
+
+

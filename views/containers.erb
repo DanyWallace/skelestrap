@@ -1,0 +1,57 @@
+<h1 class="title">Ghost blogs</h1>
+<h2 class="subtitle">and stuff</h2>
+<hr>
+<div class="tabs">
+  <ul>
+    <li class="is-active"><a href="/blogs">Blogs</a></li>
+    <li><a href="/blogs/create">Create</a></li>
+    <li><a href="/blogs/stats">Stats</a></li>
+  </ul>
+</div>
+<div class="columns">
+
+	<div class="column is-8">
+		<h2 class="title">ok...</h2>
+		<h3 class="subtitle">here goes more info</h3>
+
+ <h1> Active Blogs</h1>
+ <table class="table is-hoverable" style="width:500px">
+  <tr class="thread ">
+    <th>#</th>
+    <th>Name</th>
+    <th>Url</th>
+    <th>Cost</th>
+    <th>Created at:</th>
+    <th>Expires:</th>
+    <th>Status</th>
+    <th>Start</th>
+    <th>Delete</th>
+  </tr>
+<%= list_blogs_active %>
+</table> 
+
+ <h1> All Blogs</h1>
+ <table class="table is-hoverable" style="width:500px">
+  <tr class="thread ">
+    <th>#</th>
+    <th>Name</th>
+    <th>Url</th>
+    <th>Cost</th>
+    <th>Created at:</th>
+    <th>Expires:</th>
+    <th>Delete</th>
+  </tr>
+<%= list_blogs %>
+</table> 
+
+	</div>
+
+	<div class="column">
+			<h1>Help:</h1>
+      <p>This is going to cost points later on.</p>
+      <p>A usual ghost blog should cost you 10 points later on.</p>
+	</div>
+</div>
+
+
+

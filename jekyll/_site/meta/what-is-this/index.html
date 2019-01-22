@@ -1,0 +1,108 @@
+    <link rel="stylesheet" href="/blog/assets/css/prism.css" />
+
+    <section class="hero is-white">
+    <div class="hero-body">
+        <div class="container is-fluid">
+            <h1 class="title">
+                So what is this about?
+            </h1>
+            <h2 class="subtitle">
+                First post with any info
+            </h2>
+        </div>
+    </div>
+</section>
+
+<div class="columns">
+    <div class="column">
+
+<section class="section">
+    <div class="container is-fluid">
+        <div class="content">
+            <p>This is about having fun.<br />
+Skeleton is divided into multiple modules, by it self it’s only supposed to manage users with a mysql db and jwt for cookies. Ironically rack cookies are encrypted which makes it useless as normal auth, but when you release some kind of api, jwt shines.
+It offers:</p>
+<ul>
+  <li>Sinatra  as a web framework</li>
+  <li>MySql as storage</li>
+  <li>jwt for auth</li>
+  <li>jekyll - for a blog*</li>
+  <li>IPs are checked against a fraud database</li>
+  <li>Email verification</li>
+</ul>
+
+<h2 id="notes---specs">Notes  &amp; specs</h2>
+<hr />
+
+<h3 id="email">Email</h3>
+<p>You can set your smtp details on main.ini, when an account is made a verification link is also sent.</p>
+
+<h3 id="blog">Blog</h3>
+
+<p>Sites friles from jekyll are found on jekyll/_site, what happens here is that everytime you request to ‘/blog/*’, w.e file you requested gets sent by sinatra. It defaults to index.html, this is actually functioning as an http server for jekyll.</p>
+
+<p>There’s a few consand pros  with this tho.</p>
+
+<p><strong>+</strong> Static files delivery scales better than a escalator.<br />
+<strong>-</strong> Site needs to be rebuilt everytime there is a post.<br />
+<strong>-</strong> As for the current release, you have to create category/tag pages manually*</p>
+
+<p>It takes me 1-4 seconds to rebuild the site on the slowest 4th gen intel cpu ever, i3 4012y @ 1.5ghz</p>
+
+<ul>
+  <li>If you wish for a page that displays, tags for example, create a new html files with the tag name that you want indexed like this:</li>
+</ul>
+
+<p>jekyll/tag/TAGNAME.html:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>---  
+layout: tagpage  
+tag: TAGNAME  
+---
+</code></pre></div></div>
+
+<p>Replace TAGNAME obviously.</p>
+
+<h3 id="fraud-checking">Fraud checking</h3>
+<p>The function ip_info(ip) returns a value betwen 0.0-1, if 1 then we got a really fishy ip, most likely from a server or some datacenter subnet.
+This uses the free version of <a href="https://www.nofraud.com/"> nofraud’s</a> old api (no docs XD).
+Also you can use it 500 times a day as a soft limit imposed by them.</p>
+
+<p>You can set the maximum danger/fishyness level on main.ini, I’d leave it at 0.8max to try and avoid as many false positives, and avoiding all datacenter ips at the least.</p>
+
+<h3 id="server-status">Server status</h3>
+<p>As of now, it only displays current ram usage and uptime, nothing else.</p>
+
+<h2 id="what-is-lacking-and-what-is-being-worked-on">What is lacking? And what is being worked on.</h2>
+<hr />
+
+<ul>
+  <li>Options to manage user accounts, another table will be created so one can choose between accounts that hold real info (name and such) or just plain user/email/password convos.</li>
+  <li>Discourse SSO <strong>&amp;</strong> shared sessionsis a WIP, I do have a working prototype of pure SSO, it just isn’t integrated into master because of current resource constrictions (I don’t have a spare docker-able machine with 1.5gb+ ram for discourse’s container).</li>
+  <li>Wiki integration, currently I’m working on integrating gollum into this, I have a working user system but so far I’m not aware on  how to properly share sessions between sinatra apps. The idea is using jwt between skeleton and gollum to verify a current session instead of sharing rack secrets thanks to <a href="https://martinfowler.com/articles/session-secret.html">this post.</a></li>
+</ul>
+
+<h2 id="some-credits">Some credits:</h2>
+<p>This jekyll layout is based on <a href="https://github.com/erayaydin/jekyll-bulma%22">erayaydin’s jekyll bulma theme</a>, obviously <strong>much</strong> different.  But this did save me some time. The header was removed, this now category/tags support, and a completly different frontpage/posts layout. Including the weird sidebar. Here is the <a href="https://era.yayd.in/jekyll-bulma/">original:</a>
+<img src="http://i.imgur.com/hIfZedI.png" /></p>
+
+        </div>
+    </div>
+</section>
+   
+
+<script src="/blog/assets/js/main.js"></script>
+<script src="/blog/blog/assets/js/jquery-3.1.1.min.js"></script>
+<script src="/blog/assets/js/prism.js"></script>
+<script>
+    $('.nav-toggle').bind('click', function(){
+        var menus = $(this).siblings(".nav-menu");
+        if(menus.hasClass('is-active')){
+            menus.removeClass('is-active');
+        } else {
+            menus.addClass('is-active');
+        }
+    });
+</script>
+
+<script type="text/javascript">document.title = "So what is this about?";</script>

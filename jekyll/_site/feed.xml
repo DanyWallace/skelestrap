@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/blog/" rel="alternate" type="text/html" /><updated>2019-01-15T12:56:42-08:00</updated><id>http://localhost:4000/blog/feed.xml</id><title type="html">melee</title><subtitle>nothing here for you to see yet</subtitle><author><name>teeigeryuh</name><email>dany@rly.fun</email></author><entry><title type="html">So what is this about?</title><link href="http://localhost:4000/blog/meta/what-is-this/" rel="alternate" type="text/html" title="So what is this about?" /><published>2018-12-28T12:00:00-08:00</published><updated>2018-12-28T12:00:00-08:00</updated><id>http://localhost:4000/blog/meta/what-is-this</id><content type="html" xml:base="http://localhost:4000/blog/meta/what-is-this/">&lt;p&gt;This is about having fun.&lt;br /&gt;
+Skeleton is divided into multiple modules, by it self it’s only supposed to manage users with a mysql db and jwt for cookies. Ironically rack cookies are encrypted which makes it useless as normal auth, but when you release some kind of api, jwt shines.
+It offers:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Sinatra  as a web framework&lt;/li&gt;
+  &lt;li&gt;MySql as storage&lt;/li&gt;
+  &lt;li&gt;jwt for auth&lt;/li&gt;
+  &lt;li&gt;jekyll - for a blog*&lt;/li&gt;
+  &lt;li&gt;IPs are checked against a fraud database&lt;/li&gt;
+  &lt;li&gt;Email verification&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;notes---specs&quot;&gt;Notes  &amp;amp; specs&lt;/h2&gt;
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;email&quot;&gt;Email&lt;/h3&gt;
+&lt;p&gt;You can set your smtp details on main.ini, when an account is made a verification link is also sent.&lt;/p&gt;
+
+&lt;h3 id=&quot;blog&quot;&gt;Blog&lt;/h3&gt;
+
+&lt;p&gt;Sites friles from jekyll are found on jekyll/_site, what happens here is that everytime you request to ‘/blog/*’, w.e file you requested gets sent by sinatra. It defaults to index.html, this is actually functioning as an http server for jekyll.&lt;/p&gt;
+
+&lt;p&gt;There’s a few consand pros  with this tho.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;+&lt;/strong&gt; Static files delivery scales better than a escalator.&lt;br /&gt;
+&lt;strong&gt;-&lt;/strong&gt; Site needs to be rebuilt everytime there is a post.&lt;br /&gt;
+&lt;strong&gt;-&lt;/strong&gt; As for the current release, you have to create category/tag pages manually*&lt;/p&gt;
+
+&lt;p&gt;It takes me 1-4 seconds to rebuild the site on the slowest 4th gen intel cpu ever, i3 4012y @ 1.5ghz&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;If you wish for a page that displays, tags for example, create a new html files with the tag name that you want indexed like this:&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;jekyll/tag/TAGNAME.html:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;---  
+layout: tagpage  
+tag: TAGNAME  
+---
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Replace TAGNAME obviously.&lt;/p&gt;
+
+&lt;h3 id=&quot;fraud-checking&quot;&gt;Fraud checking&lt;/h3&gt;
+&lt;p&gt;The function ip_info(ip) returns a value betwen 0.0-1, if 1 then we got a really fishy ip, most likely from a server or some datacenter subnet.
+This uses the free version of &lt;a href=&quot;https://www.nofraud.com/&quot;&gt; nofraud’s&lt;/a&gt; old api (no docs XD).
+Also you can use it 500 times a day as a soft limit imposed by them.&lt;/p&gt;
+
+&lt;p&gt;You can set the maximum danger/fishyness level on main.ini, I’d leave it at 0.8max to try and avoid as many false positives, and avoiding all datacenter ips at the least.&lt;/p&gt;
+
+&lt;h3 id=&quot;server-status&quot;&gt;Server status&lt;/h3&gt;
+&lt;p&gt;As of now, it only displays current ram usage and uptime, nothing else.&lt;/p&gt;
+
+&lt;h2 id=&quot;what-is-lacking-and-what-is-being-worked-on&quot;&gt;What is lacking? And what is being worked on.&lt;/h2&gt;
+&lt;hr /&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Options to manage user accounts, another table will be created so one can choose between accounts that hold real info (name and such) or just plain user/email/password convos.&lt;/li&gt;
+  &lt;li&gt;Discourse SSO &lt;strong&gt;&amp;amp;&lt;/strong&gt; shared sessionsis a WIP, I do have a working prototype of pure SSO, it just isn’t integrated into master because of current resource constrictions (I don’t have a spare docker-able machine with 1.5gb+ ram for discourse’s container).&lt;/li&gt;
+  &lt;li&gt;Wiki integration, currently I’m working on integrating gollum into this, I have a working user system but so far I’m not aware on  how to properly share sessions between sinatra apps. The idea is using jwt between skeleton and gollum to verify a current session instead of sharing rack secrets thanks to &lt;a href=&quot;https://martinfowler.com/articles/session-secret.html&quot;&gt;this post.&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;some-credits&quot;&gt;Some credits:&lt;/h2&gt;
+&lt;p&gt;This jekyll layout is based on &lt;a href=&quot;https://github.com/erayaydin/jekyll-bulma%22&quot;&gt;erayaydin’s jekyll bulma theme&lt;/a&gt;, obviously &lt;strong&gt;much&lt;/strong&gt; different.  But this did save me some time. The header was removed, this now category/tags support, and a completly different frontpage/posts layout. Including the weird sidebar. Here is the &lt;a href=&quot;https://era.yayd.in/jekyll-bulma/&quot;&gt;original:&lt;/a&gt;
+&lt;img src=&quot;http://i.imgur.com/hIfZedI.png&quot; /&gt;&lt;/p&gt;</content><author><name>teeigeryuh</name><email>dany@rly.fun</email></author><category term="news" /><summary type="html">This is about having fun. Skeleton is divided into multiple modules, by it self it’s only supposed to manage users with a mysql db and jwt for cookies. Ironically rack cookies are encrypted which makes it useless as normal auth, but when you release some kind of api, jwt shines. It offers: Sinatra as a web framework MySql as storage jwt for auth jekyll - for a blog* IPs are checked against a fraud database Email verification</summary></entry><entry><title type="html">titleeee gayagaagya</title><link href="http://localhost:4000/blog/meta/hello-poop/" rel="alternate" type="text/html" title="titleeee gayagaagya" /><published>2018-10-02T01:08:00-07:00</published><updated>2018-10-02T01:08:00-07:00</updated><id>http://localhost:4000/blog/meta/hello-poop</id><content type="html" xml:base="http://localhost:4000/blog/meta/hello-poop/">&lt;p&gt;hello this is text&lt;/p&gt;
+
+&lt;h1 id=&quot;test&quot;&gt;test&lt;/h1&gt;
+&lt;h2 id=&quot;test2&quot;&gt;test2&lt;/h2&gt;
+&lt;h3 id=&quot;test-3&quot;&gt;test 3&lt;/h3&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;lets see if it workz?&lt;/p&gt;</content><author><name>teeigeryuh</name><email>dany@rly.fun</email></author><category term="random" /><summary type="html">hello this is text</summary></entry><entry><title type="html">hello this is a test post</title><link href="http://localhost:4000/blog/meta/hello-world/" rel="alternate" type="text/html" title="hello this is a test post" /><published>2017-12-11T00:08:00-08:00</published><updated>2017-12-11T00:08:00-08:00</updated><id>http://localhost:4000/blog/meta/hello-world</id><content type="html" xml:base="http://localhost:4000/blog/meta/hello-world/">&lt;p&gt;Welcome :O 
+This is a site based on sinatra with a forked &lt;a href=&quot;https://github.com/erayaydin/jekyll-bulma&amp;quot;&quot;&gt;bulma based theme&lt;/a&gt; made by erayaydin, made into another bulma-based variation.
+In this case, bulma’s cyborg colors were used and layout was changed and a dead simple translation to english.&lt;/p&gt;
+
+&lt;p&gt;This site is a WIP, you can see a git/gogs &lt;a href=&quot;http://src.eureka.ink&quot;&gt;server&lt;/a&gt;&lt;/p&gt;</content><author><name>teeigeryuh</name><email>dany@rly.fun</email></author><category term="news" /><category term="random" /><summary type="html">Welcome :O This is a site based on sinatra with a forked bulma based theme made by erayaydin, made into another bulma-based variation. In this case, bulma’s cyborg colors were used and layout was changed and a dead simple translation to english.</summary></entry></feed>

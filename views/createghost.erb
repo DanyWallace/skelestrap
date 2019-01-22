@@ -1,0 +1,52 @@
+<h1 class="title">Ghost blogs</h1>
+<h2 class="subtitle">Creat a new blog</h2>
+<hr>
+<div class="tabs">
+  <ul>
+    <li><a href="/blogs">Blogs</a></li>
+    <li class="is-active"><a a href="/blogs/create">Create</a></li>
+    <li><a href="/blogs/stats">Stats</a></li>
+  </ul>
+</div>
+<div class="columns">
+	<div class="column is-8">
+
+    <form method="post" action="/blogs/create/" class="form">
+    <div class="control">
+        <label class="label">Name</label>
+        <input class ="input" type="text" name="Name">
+        <p class="help">make it edgy</p>
+    </div>
+    <div class="control">
+        <label class="label">Url</label>
+        <input class ="input" type="text" name="Url">
+        <p class="help">no "http" or "/", just a domain like "something.com" - "another.site.net</p>
+    </div>
+    <div class="control">
+        <label class="label">Code</label>
+        <p class="help">If you have one</p>
+        <input class ="input" type="text" name="code">
+    </div>    
+    <center>
+        <span>
+            <h1>Create an "A" dns record pointing to ip: <b>107.173.214.238</b></h1>
+        </span>
+        <button type="submit" class="button is-info is-outlined">Create</button>
+    </center>
+</form>
+
+
+
+
+	</div>
+
+	<div class="column">
+			<h1>Help:</h1>
+      <p>This is going to cost points later on.</p>
+      <p>You can use this free domain: </p>
+      <p>Like:  yoursite.rly.fun</p>
+	</div>
+</div>
+
+
+

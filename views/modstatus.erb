@@ -1,0 +1,67 @@
+<script type="text/javascript">
+function getram() {
+  $.ajax({
+    url: 'http://127.0.0.1:4567/status/ram',
+    success: function(data) {
+      $('div.ram').html(data);
+    }
+  });
+}
+
+function getup() {
+  $.ajax({
+    url: 'http://127.0.0.1:4567/status/uptime',
+    success: function(data) {
+      $('div.time').html(data);
+    }
+  });
+}
+
+
+var interval = setInterval(getram, 5000);
+setTimeout(function() {
+    clearInterval(interval)
+}, -1);
+var interval = setInterval(getup, 15000);
+setTimeout(function() {
+    clearInterval(interval)
+}, -1);
+getram()
+getup()
+</script>
+
+<h1 class="title"><%= @@site_name %>.<%= @hostname %> Status</h1>
+<h2 class="subtitle">and stuff</h2>
+<hr>
+<div class="tabs">
+  <ul>
+    <li class="is-active"><a href="/status">Status</a></li>
+    <li><a href="/status/users">Users</a></li>
+    <li><a>Site</a></li>
+    <li><a>Stats</a></li>
+  </ul>
+</div>
+<div class="columns">
+	<div class="column is-3 is-offset-1 ">
+		<div class="tags has-addons">
+			<span class="tag">Ram</span>
+			<span class="tag is-primary"><b><div class="ram">0000/0000</div></b></span>
+		</div>
+		<div class="tags has-addons">
+			<span class="tag">Uptime</span>
+			<span class="tag is-primary"><b><div class="time">00:00</div></b></span>
+		</div>
+	</div>
+	<div class="column">
+		<h2 class="title">ok...</h2>
+		<h3 class="subtitle">here goes more info</h3>
+		<hr>
+		<p>So.... when i was a kid </p>
+		<p>
+		Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam blandit suscipit fermentum. Vestibulum id ligula dui. Integer placerat justo ac felis efficitur tristique. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Pellentesque auctor a metus eu sagittis. Fusce quam augue, hendrerit hendrerit tincidunt vitae, sagittis nec risus. Morbi vel purus vitae erat imperdiet congue eleifend nec mauris.
+		</p>
+	</div>
+</div>
+
+
+

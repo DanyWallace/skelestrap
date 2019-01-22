@@ -1,0 +1,41 @@
+name: melee
+description: "nothing here for you to see yet"
+baseurl: /blog
+url: http://rly.fun/
+download: "https://github.com/erayaydin/jekyll-bulma/archive/master.zip"
+social:
+  github: teeigeryuh
+  email: dany@rly.fun
+  facebook:
+  twitter: 
+  instagram:
+  tumblr:
+author:
+  name: teeigeryuh
+  bio: "nobody"
+  email: dany@rly.fun
+  image: /assets/images/author.jpg
+  github: teeigeryuh
+  facebook: 
+  twitter: 
+  tumblr:
+  show_on_post: false
+permalink: /:categories/:title/
+sass:
+  style: compressed
+paginate: 5
+paginate_path: "/:num/"
+markdown: kramdown
+
+plugins:
+  - jekyll-paginate
+  - jekyll-feed
+  - jekyll-gist
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - LICENSE
+  - CNAME
+  - vendor

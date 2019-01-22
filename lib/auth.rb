@@ -1,3 +1,4 @@
+#key from certs
 signing_key_path = File.expand_path("../app.rsa", __FILE__)
 verify_key_path = File.expand_path("../app.rsa.pub", __FILE__)
 
@@ -14,6 +15,11 @@ end
 
 set :signing_key, signing_key
 set :verify_key, verify_key
+
+
+# key from ini 
+settingini = IniFile.load('main.ini')
+set :hkey, settingini['secret']['jwt']
 
 # enable sessions which will be our default for storing the token
 enable :sessions
@@ -34,7 +40,7 @@ helpers do
   def extract_token
     # check for the access_token header
     token = request.env["access_token"]
-    
+
     if token
       return token
     end
@@ -62,7 +68,9 @@ helpers do
     #someoneauthed = `echo "\n//tried to login with this token// #{@token} //end//" >> log.txt`
 
     begin
-      payload, header = JWT.decode @token, settings.verify_key, true, { :algorithm => 'RS256' }
+      #Select one depending on algorithm.
+      payload, header = JWT.decode @token, settings.hkey, true, { :algorithm => 'HS256' }
+       #payload, header = JWT.decode @token, settings.verify_key, true, { :algorithm => 'RS256' }
       @exp = payload['exp']
       #authworked = `echo " // payload: #{payload} expppp: #{payload['exp']} // end//" >> log.txt`
       #check to see if the exp is set (we don't accept forever tokens)
@@ -76,11 +84,14 @@ helpers do
       # make sure the token hasn't expired
       if Time.now > @exp
         puts "Access token expired"
+        session["access_token"] = nil
         return false
       end
 
+      @rank = payload['rank']
       @user_id = payload['user_id']
       @user_name = payload['user_name']
+      #@rank = @@client.query("Select Rank FROM Users WHERE Username = '#{@user_name}'").each(:as => :array).join(", ")
     rescue JWT::DecodeError => e
       return false
     end
@@ -91,7 +102,9 @@ helpers do
     #someoneauthed = `echo "\n//tried to login with this token// #{@token} //end//" >> log.txt`
 
     begin
-      payload, header = JWT.decode @token, settings.verify_key, true, { :algorithm => 'RS256' }
+      #Select one depending on algorithm.
+      payload, header = JWT.decode @token, settings.hkey, true, { :algorithm => 'HS256' }
+       #payload, header = JWT.decode @token, settings.verify_key, true, { :algorithm => 'RS256' }
       @exp = payload['exp']
       someoneauthed = `echo " // payload: #{payload} expppp: #{payload['exp']} // end//" >> log.txt`
       # check to see if the exp is set (we don't accept forever tokens)
@@ -105,9 +118,11 @@ helpers do
       # make sure the token hasn't expired
       if Time.now > @exp
         puts "Access token expired"
+        session["access_token"] = nil
         return false
       end
-
+      
+      @rank = payload['rank']
       @user_id = payload['user_id']
       @user_name = payload['user_name']
     rescue JWT::DecodeError => e

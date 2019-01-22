@@ -2,15 +2,55 @@
 	<head>
 		<title><%= @title %></title>
 
-		<link rel="stylesheet" type="text/css" href="css/eureka.css">
-		<link rel="stylesheet" type="text/css" href="css/bulma.css">
+		<link rel="stylesheet" type="text/css" href="http://127.0.0.1:4567/css/eureka.css">
+		<!-- <link rel="stylesheet" type="text/css" href="css/bulma.css"> -->
+		<link rel="stylesheet" type="text/css" href="http://127.0.0.1:4567/css/bulma.css">
+		<script src="<%= @url %>/js/jquery-3.2.1.js"></script>
+		<script src="<%= @url %>/js/eureka.js"></script>
+		<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:300" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono" rel="stylesheet">
+
+
+	<% if authorized? %>
+			<script type="text/javascript">
+				function getpoints() {
+  						$.ajax({
+    					url: '<%= @url %>/user/info/<%= @user_name%>/Points',
+    					success: function(data) {
+      					$('div.userpoints').html(data);
+    					}
+  					});
+				}
+				getpoints()
+			</script>
+	<% end %>
 
 	</head>
 
 	<body>
-	<nav class="navbar is-light" role="navigation" aria-label="main navigation">
+	<nav class="navbar is-transparent is-fixed-top" role="navigation" aria-label="main navigation">
 		<div class="navbar-start">
-		    <a class="navbar-item" href="/">Home</a>
+		    <a class="navbar-item" href="/"> <%= @@site_name %> </a>
+		    <a class="navbar-item" href="/blog/">Blog</a>
+		    
+		    <% if authorized? %>
+		    
+		    <div class="navbar-item has-dropdown is-hoverable">
+		    <a class="navbar-link " href="/status">Status</a>
+
+		    	<div class="navbar-dropdown">
+		    		<a class="navbar-item">Users</a>
+		    		<a class="navbar-item">Site</a>
+		    		<a class="navbar-item">Stats</a>
+		    	</div>
+
+		    </div>
+		    
+		    <a class="navbar-item" href="/blogs">My Blogs</a>
+
+		    <% end %>
+
+
 		</div>
 		<div class="navbar-end">
 			<% if @token == nil %>
@@ -24,6 +64,17 @@
 				</div>
 			</div>
 			<% else %>
+			<div class="navbar-item">
+				<div class="tags has-addons">
+			<span class="tag is-dark">Points</span>
+			<span class="tag is-info"><div class="userpoints">--</div></span>
+				</div>
+			</div>
+			<div class="navbar-item">
+				<figure class="image is-32x32">
+        			<img src="<%= @url %>/avys/<%= user_info(@user_name, 'Pic')%>">
+        		</figure>
+        	</div>
 			<div class="navbar-item has-dropdown is-hoverable">
 				<a class="navbar-link">
 					<%= @user_name %>
@@ -34,14 +85,12 @@
 			</div>
 			<% end %>
 		</div>
-	</div>
 	</nav>
 
-
 	<div class="contain">
-
-	<%= yield %>
-	
+		<div class="section">
+			<%= yield %>
+		</div>	
 	</div>
 	</body>
 

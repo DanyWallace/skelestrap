@@ -1,9 +1,38 @@
+	<h1 class="title">Front Board</h1>
+	<h2 class="subtitle">nothing here for you yet</h2>
+	<hr>
 	<div class="columns">
-		<div class="column is-one-quarter box">
-			hello this goes all the way to who knows what
-		</div>
-		<div class="column is-offset-1	 box">
+		<div class="column is-one-quarter">
+			<div class="title"><%= user_info(@user_name, 'Username')%></div>
+			<center>
+        	<figure class="image is-128x128">
+        		<img src="avys/<%= user_info(@user_name, 'Pic')%>">
+        	</figure>
+        	<center>
+        </div>
+		<div class="column">
 			<p>Welcome. <%= @user_name %>, you have a valid token.</p>
         	<p> Your token will expire at: <%= @exp.strftime("%m/%d/%y %H:%M:%S %P") %></p>
+        	<p> Current points: <%= current_points %></p>
+        	<p>Your current ip: <b><%= request.ip %></b></p>
+        	<p>Your rank: <%= user_info(@user_name, 'Rank')%>
+        	<hr>
+        	<h1>Upload new picture</h1>
+        	<form action='/upload/avatar' enctype="multipart/form-data" method='POST'>
+    			<input name="file" type="file" />
+    			<input type="submit" value="Upload" />
+			</form>
+
+
+		</div>
+		<div class="someclass"></div>
+	</div>
+
+	<div class="columns">
+		<div class="column is-one-quarter">
+			<%= user_info(@user_name, 'Name')%>
+			<hr>
+			<h1>Info:</h1>
+			<%= user_info(@user_name, 'Bio')%>
 		</div>
 	</div>

@@ -1,0 +1,33 @@
+    <link rel="stylesheet" href="/blog/assets/css/prism.css" />
+
+    <!-- We're going to give each page a tag when we create it.
+This will be the title -->
+<h1>Random</h1>
+
+<ul>
+    
+    <li>
+        October 02, 2018: <a href="/blog/meta/hello-poop/">titleeee gayagaagya</a>
+    </li>
+    
+    <li>
+        December 11, 2017: <a href="/blog/meta/hello-world/">hello this is a test post</a>
+    </li>
+    
+</ul>   
+
+<script src="/blog/assets/js/main.js"></script>
+<script src="/blog/blog/assets/js/jquery-3.1.1.min.js"></script>
+<script src="/blog/assets/js/prism.js"></script>
+<script>
+    $('.nav-toggle').bind('click', function(){
+        var menus = $(this).siblings(".nav-menu");
+        if(menus.hasClass('is-active')){
+            menus.removeClass('is-active');
+        } else {
+            menus.addClass('is-active');
+        }
+    });
+</script>
+
+<script type="text/javascript">document.title = "melee";</script>

@@ -1,0 +1,51 @@
+    <link rel="stylesheet" href="/blog/assets/css/prism.css" />
+
+    <section class="hero is-black">
+    <div class="hero-body">
+        <div class="container is-fluid">
+            <h1 class="title">
+                Archive
+            </h1>
+            <h2 class="subtitle">
+                srsly you're wasting your time
+            </h2>
+        </div>
+    </div>
+</section>
+<section class="section">
+    <div class="container is-fluid">
+        <aside class="menu">
+            
+            
+            <p class="menu-label" id="category-meta">
+                meta
+            </p>
+            <ul class="menu-list">
+                
+                <li><a href="/blog/meta/what-is-this/">So what is this about?</a></li>
+                
+                <li><a href="/blog/meta/hello-poop/">titleeee gayagaagya</a></li>
+                
+                <li><a href="/blog/meta/hello-world/">hello this is a test post</a></li>
+                
+            </ul>
+            
+        </aside>
+    </div>
+</section>   
+
+<script src="/blog/assets/js/main.js"></script>
+<script src="/blog/blog/assets/js/jquery-3.1.1.min.js"></script>
+<script src="/blog/assets/js/prism.js"></script>
+<script>
+    $('.nav-toggle').bind('click', function(){
+        var menus = $(this).siblings(".nav-menu");
+        if(menus.hasClass('is-active')){
+            menus.removeClass('is-active');
+        } else {
+            menus.addClass('is-active');
+        }
+    });
+</script>
+
+<script type="text/javascript">document.title = "melee";</script>

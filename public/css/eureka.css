@@ -1,5 +1,10 @@
 .contain {
-	max-width: 900px;
+	max-width: 1190px;
+	margin: 15 auto;
+	padding: 15px;
+}
+.containblog {
+	max-width: 1190px;
 	margin: 15 auto;
 	padding: 15px;
 }
@@ -7,4 +12,9 @@
 .separatee {
 	margin: 15 auto;
 	padding: 15px;
+}
+
+.header {
+	padding: 5px;
+	margin: 5px;
 }
